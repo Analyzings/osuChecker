@@ -1,9 +1,9 @@
 <h2>
 You can directly open it here:</h2>
 https://divertentes.eu/osucheck
+
 <h2>
 Setup</h2>
-
 <div class="snippet-clipboard-content dependencies position-relative overflow-auto">
 <pre class="dependencies">
 <code>pip install -r requirements.txt
