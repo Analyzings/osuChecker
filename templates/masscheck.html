@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>masscheck » osu!Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='osucheck.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <form id="username-form">
+        <textarea id="username-input" placeholder="Enter usernames in format:
+user1
+user2" rows="10" required></textarea>
+        <button class="button" type="button" id="check-button">Check Usernames</button>
+    </form>
+  
+    <center><button class="button" onclick="window.location.href='/'">Back</button></center>
+    <div id="result" class="result"></div>
+    <button class="button" id="save-log-button" style="display: none;">Save Log</button> 
+    
+    <style>
+        #username-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #2e2d2d;
+        }
+
+        #username-input-wrapper {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #username-input {
+            resize: none;
+            overflow-y: auto;
+            height: 200px; 
+            width: 400px;
+            border: 1px solid #df0d0d;
+
+        }
+
+        #username-input::placeholder {
+            white-space: pre;
+        }
+
+        .result {
+            color: white;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            var logContent = "";
+            var originalUsernames = [];
+    
+            $('#check-button').click(function() {
+                var usernamesInput = $('#username-input').val();
+                var usernames = usernamesInput.split('\n');
+                originalUsernames = usernames.slice();
+    
+                usernames = usernames.filter(function(username) {
+                    return username.trim() !== '';
+                });
+    
+                var totalUsernames = usernames.length;
+                var checkedUsernames = 0;
+    
+                if (totalUsernames === 0) {
+                    $('#result').text('No usernames provided.');
+                    $('#save-log-button').hide();
+                    return;
+                }
+    
+                $('#result').text('Processing...');
+                $('#save-log-button').hide();
+    
+                usernames.forEach(function(username) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/check_username',
+                        data: { username: username.trim() },
+                        success: function(data) {
+                            checkedUsernames++;
+                            logContent += 'Status for ' + username + ': ' + data.status + '\n';
+    
+                            if (checkedUsernames === totalUsernames) {
+                                displayLog();
+                            }
+                        }
+                    });
+                });
+            });
+    
+            function displayLog() {
+                var orderedLog = "";
+                originalUsernames.forEach(function(username) {
+                    username = username.trim();
+                    if (username) {
+                        orderedLog += 'Status for ' + username + ': ';
+                        var status = logContent.match(new RegExp(username + ": (.+?)\\n"));
+                        if (status) {
+                            orderedLog += status[1] + '\n';
+                        } else {
+                            orderedLog += 'Status not found\n';
+                        }
+                    }
+                });
+    
+                $('#result').text('Mass-check done. Save log file for details.');
+                $('#save-log-button').show();
+    
+                $('html, body').animate({
+                    scrollTop: $('#save-log-button').offset().top
+                }, 1000);
+    
+                logContent = orderedLog;
+            }
+    
+            $('#save-log-button').click(function() {
+                var blob = new Blob([logContent], { type: 'text/plain' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'log.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        });
+    </script>
+        <header>
+            <a class="logo"> MASSCHECK</a>
+            <ul class="navlist">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact">Contact Me</a></li>
+        </ul>
+        </header>
+        <footer><h3>made with <FONT COLOR=red>❤︎</FONT> by <a href="https://github.com/Analyzings" class="linkfooter" target="_blank">divertente.</a></h3></footer>
+    </body>
+</html>

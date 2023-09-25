@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>usercheck » osu!Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='osucheck.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+            color: white;
+        }
+        
+        .available {
+            color: green;
+        }
+        
+        .not-available {
+            color: red;
+        }
+
+        #username-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            background-color: #2e2d2d;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #username-input {
+            width: 100%; 
+            resize: none;
+            overflow-y: auto;
+            max-width: 600px;
+            padding: 15px;
+            border: 1px solid #df0d0d;
+            border-radius: 4px;
+        }
+
+        #username-input::placeholder {
+            white-space: pre;
+            color: gray;
+        }
+
+    </style>
+</head>    
+<body>
+    <form id="username-form">
+        <input type="text" id="username-input" placeholder="Enter a username" required>
+        <button type="button" class="button" id="check-button">Check Username</button>
+    </form>
+    <center><button class="button" onclick="window.location.href='/'">Back</button></center>
+    <div id="result"></div>
+    <script>
+        $(document).ready(function() {
+            $('#check-button').click(function() {
+                var username = $('#username-input').val().trim();
+                $('#result').empty();
+    
+                if (username === '') {
+                    $('#result').html('No usernames provided.');
+                } else {
+                    // Display "Processing..." with a delay
+                    setTimeout(function() {
+                        $('#result').html('Processing...');
+                    }, 100); // Adjust the delay time as needed
+    
+                    $.ajax({
+                        type: 'POST',
+                        url: '/check_username',
+                        data: { username: username },
+                        success: function(data) {
+                            var resultText = data.status;
+                            var resultClass = resultText === 'Username available' ? 'available' : 'not-available';
+                            $('#result').html('<span class="' + resultClass + '">' + resultText + '</span>');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+      
+        <header>
+            <a class="logo"> USERCHECK</a>
+            <ul class="navlist">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact">Contact Me</a></li>
+        </ul>
+        </header>
+        <footer><h3>made with <FONT COLOR=red>❤︎</FONT> by <a href="https://github.com/Analyzings" class="linkfooter" target="_blank">divertente.</a></h3></footer>
+    </body>
+</html>
