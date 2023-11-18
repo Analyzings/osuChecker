@@ -192,6 +192,33 @@
       cursor: none;
   }
 
+  .divertente {
+    background: linear-gradient(
+        to left,
+        #ff66ff,
+        #ccffff,
+        rgb(204, 255, 210),
+        #ffcc99,
+        #ffff99
+      );
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      animation: animate 20s linear infinite;
+      background-size: 800%;
+    }
+    
+    @keyframes animate {
+      0% {
+        background-position: 0% 100%;
+      }
+      50% {
+        background-position: 100% 0%;
+      }
+      100% {
+        background-position: 0% 100%;
+      }
+    }
+
   .navlist a:hover {
       border-bottom: 2px solid #f73d30;
       z-index: 0;
@@ -296,8 +323,8 @@
             coutline.style.top = `${storedY}px`;
         }
     </script>
-      <footer><h3>made with <font color="red">❤︎</font> by <a href="https://github.com/Analyzings" class="linkfooter" target="_blank">divertente.</a></h3>
-    </footer>
+  <h3>made with <font color="red">❤︎</font> by <a href="https://github.com/Analyzings" class="linkfooter divertente" target="_blank">divertente.</a></h3></footer>
+  </footer>
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Please enter the long URL to be shortened:</h5>
