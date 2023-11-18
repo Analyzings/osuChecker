@@ -26,38 +26,30 @@
  * {
       margin: 0;
       padding: 0;
-      cursor: none;
     }
     html, body {
       height: 100%;
-      cursor: none;
     }
     
     .card {
         background-color: transparent;
         width: 768px;
-        cursor: none;
     }
     .card-body {
         background-color: #2e2d2d;
-        cursor: none;
     }
     .card-text {
         text-align: center;
-        cursor: none;
     }
     .card-text > a {
         text-decoration: none;
         color: #f73d30;
-        cursor: none;
     }
     .card-text > a {
         cursor: pointer;
-        cursor: none;
     }
     .form-control {
         font-family: 'Poppins', sans-serif;
-        cursor: none;
     }
     @media (max-width: 769px) {
         .card {
@@ -90,11 +82,9 @@
       -webkit-box-pack: center;
       justify-content: center;
       vertical-align: center;
-      cursor: none;
       flex-wrap: wrap;
       height: 100vh;
       align-content: center;
-      cursor: none;
     }
 
     footer {
@@ -106,13 +96,11 @@
       text-align: center;
       color: white;
       font-weight: bold;
-      cursor: none;
       z-index: 102;
   }
 
   .h3,h3 {
     font-weight: bold;
-    cursor: none;
   }
 
   .footer2 {
@@ -124,20 +112,17 @@
       text-align: center;
       font-weight: bold;
       color: black;
-      cursor: none;
       z-index: 102;
   }
 
   .linkfooter {
       color: white;
-      cursor: none;
       text-decoration: none;
   }
 
     .link {
         color: #fff;
         text-decoration: none;
-        cursor: none;
     }
 
     header {
@@ -151,7 +136,6 @@
         justify-content: space-between;
         padding: 33px 9%;
         background: transparent;
-        cursor: none;
     }
 
     .logo {
@@ -159,20 +143,17 @@
         font-weight: 700;
         color: #fff;
         text-decoration: none;
-        cursor: none;
     }
 
     form {
         text-align: center;
         margin-top: 20px;
         color: gray;
-        cursor: none;
     }
 
     .navlist {
       display: flex;
       list-style: none;
-      cursor: none;
       margin-top: 11px;
   }
 
@@ -180,7 +161,6 @@
     margin-bottom: .75rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
-    cursor: none;
   }
 
   .navlist a {
@@ -191,7 +171,6 @@
       border-bottom: 2px solid transparent;
       transition: all .55s ease;
       text-decoration: none;
-      cursor: none;
   }
 
   .divertente {
@@ -224,32 +203,7 @@
   .navlist a:hover {
       border-bottom: 2px solid #f73d30;
       z-index: 0;
-      cursor: none;
   }
-
-    .cursor {
-        width: 7px;
-        height: 7px;
-        background-color: #e7eb0f;
-        z-index: 9999;
-    }
-
-    .coutline {
-        width: 30px;
-        height: 30px;
-        border: 2px solid hsla(0, 0%, 100% , 0.5);
-    }
-
-    .cursor,
-    .coutline {
-        position: fixed;
-        top: 0;
-        left: 0;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        z-index: 9999;
-        pointer-events: none;
-    }
 
     .button {
       background-color: #ff0000;
@@ -260,20 +214,11 @@
       font-size: 14px;
       transition: background-color 0.3s ease, transform 0.2s ease;
       margin: 12px;
-      cursor: none;
   }
 
   .button:hover {
       background-color: #9b0000;
       transform: scale(1.05);
-      cursor: none;
-  }
-  .searchbtn,
-  .btn,
-  .form-control,
-  .btn-primary,
-  .btn-primary:hover {
-    cursor: none;
   }
 
   ::-webkit-scrollbar {
@@ -292,45 +237,13 @@
           <li><a href="https://url.divertentes.eu">URL shortener</a></li>
       </ul>
   </header>
-    <div class="cursor" data-cursor></div>
-   <div class="coutline" data-coutline></div>    
-
-    <script>
-    const cursor = document.querySelector(".cursor");
-    const coutline = document.querySelector(".coutline");
-        
-    window.addEventListener("mousemove", function (e) {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            cursor.style.left = `${posX}px`;
-            cursor.style.top = `${posY}px`;
-
-            coutline.animate({
-                left: `${posX}px`,
-                top:  `${posY}px`
-            }, { duration: 300, fill: "forwards"});
-
-            localStorage.setItem('cursorX', posX);
-            localStorage.setItem('cursorY', posY);
-        });
-
-        const storedX = localStorage.getItem('cursorX');
-        const storedY = localStorage.getItem('cursorY');
-
-        if (storedX !== null && storedY !== null) {
-            cursor.style.left = `${storedX}px`;
-            cursor.style.top = `${storedY}px`;
-
-            coutline.style.left = `${storedX}px`;
-            coutline.style.top = `${storedY}px`;
-        }
-    </script>
 
     <style>
       .result {
         color: black;
+        background-color: black;
       }
+
     </style>
 
   <footer><h3>made with <font color="red">❤︎</font> by <a href="https://github.com/Analyzings" class="linkfooter divertente" target="_blank">divertente.</a></h3></footer>
