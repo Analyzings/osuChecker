@@ -307,14 +307,35 @@
 
         var closeButton = document.createElement("div");
         closeButton.style.position = "relative";
-        closeButton.style.top = "-266px";
-        closeButton.style.right = "40px";
+        closeButton.style.top = "-574px";
+        closeButton.style.right = "-363px";
         closeButton.style.fontSize = "24px";
         closeButton.style.cursor = "pointer";
         closeButton.style.zIndex = "9999";
         closeButton.innerHTML = "&#x2716;";
 
         closeButton.addEventListener("click", closePrivacyPolicy);
+
+        var privacyPolicyLink = document.createElement("a");
+        privacyPolicyLink.href = "https://www.iubenda.com/privacy-policy/32122931/legal";
+        privacyPolicyLink.target = "_blank"; // Open in a new page
+        privacyPolicyLink.innerText = "Show the complete Privacy Policy";
+        privacyPolicyLink.style.position = "relative";
+        privacyPolicyLink.style.top = "565px";
+        privacyPolicyLink.style.right = "-289px";
+        privacyPolicyLink.style.fontSize = "10px";
+        privacyPolicyLink.style.cursor = "pointer";
+        privacyPolicyLink.style.zIndex = "9999";
+        privacyPolicyLink.style.opacity = "0";
+        privacyPolicyLink.style.backgroundColor = "white";
+        privacyPolicyLink.style.color = "black";
+        privacyPolicyLink.style.textDecoration = "underline";
+
+        // per delay (caricamento piu' fluido)
+        setTimeout(function () {
+            privacyPolicyLink.style.transition = "opacity 0.10s ease-in-out";
+            privacyPolicyLink.style.opacity = "1";
+        }, 500);
 
         var overlay = document.createElement("div");
         overlay.style.position = "fixed";
@@ -325,10 +346,12 @@
         overlay.style.backgroundColor = "rgba(255, 255, 255, 0)";
         overlay.style.zIndex = "9999";
         overlay.style.display = "flex";
+        overlay.style.flexDirection = "column";
         overlay.style.alignItems = "center";
         overlay.style.justifyContent = "center";
         overlay.style.backdropFilter = "blur(2px)"; 
 
+        overlay.appendChild(privacyPolicyLink);
         overlay.appendChild(embedFrame);
         overlay.appendChild(closeButton);
 
