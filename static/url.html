@@ -238,14 +238,6 @@
       </ul>
   </header>
 
-    <style>
-      .result {
-        color: black;
-        background-color: black;
-      }
-
-    </style>
-
   <footer><h3>made with <font color="red">❤︎</font> by <a href="https://github.com/Analyzings" class="linkfooter divertente" target="_blank">divertente.</a></h3></footer>
   </footer>
   <div class="card">
@@ -376,7 +368,7 @@
     document.getElementById("searchbtn").disabled=false;
 	document.getElementById("searchbtn").innerHTML=' Shorten it';
     if(res.key!=="")
-    document.getElementById("result").innerHTML=window.location.host+res.key;
+    document.getElementById("result").innerHTML = "https://" + window.location.host + res.key;
     $('#exampleModal').modal('show')
   }).catch(function(err){alert("Unknow error. Please retry!");
   console.log(err);
@@ -420,7 +412,7 @@
   $(function () {
     $('[data-toggle="popover"]').popover()
   })
-  let notice="Notice: This service is for demonstration purposes only and the generated short links will automatically expire after 24 hours."
+  let notice=""
   if(window.location.host=="lnks.eu.org"){
     document.getElementById("notice").innerHTML=notice
   }
