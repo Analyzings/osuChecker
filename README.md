@@ -1,6 +1,7 @@
 <h2>
 You can directly open it here:</h2>
-https://divertentes.eu/osucheck
+<s>https://divertentes.eu/osucheck</s>
+https://divertente.codes/osucheck
 
 <h2>
 Setup</h2>
