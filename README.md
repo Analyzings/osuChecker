@@ -2,7 +2,7 @@
 You can directly open it here:</h2>
 <s>https://divertentes.eu/osucheck</s>
 
-https://divertente.codes/osucheck
+https://divertentes.it/osucheck
 
 <h2>
 Setup</h2>
